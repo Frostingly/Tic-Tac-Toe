@@ -1,7 +1,8 @@
 import './Game.css';
-import React from 'react'
+import React, { Component } from 'react'
 
 let game_finished = false;
+let winner = ''
 
 function detectWinner(positions: string[]) {
     if (positions[0] === 'CROSS' && positions[3] === 'CROSS' && positions[6] === 'CROSS') return 'CROSS'
@@ -29,17 +30,25 @@ function detectWinner(positions: string[]) {
     if (positions.every(position => position !== 'EMPTY')) return 'It is a tie'
 }
 
-function Game() {
-    const [state, setState] = React.useState({
-        game_finished: false,
-        positions: [
-            'EMPTY', 'EMPTY', 'EMPTY',
-            'EMPTY', 'EMPTY', 'EMPTY',
-            'EMPTY', 'EMPTY', 'EMPTY'
-        ]
-    })
+class Game extends Component<{}, {positions: string[]}> {
+    constructor() {
+        // @ts-ignore
+        super()
 
-    function ai(positions: string[]) {
+        this.state = {
+            positions: [
+                'EMPTY', 'EMPTY', 'EMPTY',
+                'EMPTY', 'EMPTY', 'EMPTY',
+                'EMPTY', 'EMPTY', 'EMPTY'
+            ]
+        }
+
+        this.ai = this.ai.bind(this)
+        this.takeTurn = this.takeTurn.bind(this)
+        this.reset = this.reset.bind(this)
+    }
+
+    ai(positions: string[]) {
 
         let number = Math.floor(Math.random() * 9);
 
@@ -56,35 +65,32 @@ function Game() {
                 positions[number] = 'CIRCLE'
                 console.log("AI " + number)
 
-                setState({
-                    game_finished: false,
+                this.setState({
                     positions: positions
                 })
             } else {
                 console.log("couldn't find an empty space")
-                ai(positions)
+                this.ai(positions)
             }
         }
     }
 
-    function takeTurn(position: number) {
+    takeTurn(position: number) {
 
-        const positions = [...state.positions]
+        const positions = [...this.state.positions]
 
         positions[position] = 'CROSS'
         console.log("Player " + position)
 
-        ai(positions)
+        this.ai(positions)
 
-        setState({
-            game_finished: false,
+        this.setState({
             positions: positions,
         })
     }
 
-    function reset() {
-        setState({
-            game_finished: false,
+    reset() {
+        this.setState({
             positions: [
                 'EMPTY', 'EMPTY', 'EMPTY',
                 'EMPTY', 'EMPTY', 'EMPTY',
@@ -101,55 +107,56 @@ function Game() {
         game_finished = false
     }
 
-    let winner = detectWinner(state.positions)
-
-    return (
-        <div className="Game">
-            <section className="grids">
-                <section className="grid-1">
-                    <div id="cube-outline" style={{ borderRight: "1px solid black", borderBottom: "1px solid black" }}>
-                        <Square uniqueID="cube-0" position={0} value={state.positions[0]} takeTurn={takeTurn} />
-                    </div>
-                    <div id="cube-outline" style={{ borderRight: "1px solid black", borderBottom: "1px solid black" }}>
-                        <Square uniqueID="cube-1" position={1} value={state.positions[1]} takeTurn={takeTurn} />
-                    </div>
-                    <div id="cube-outline" style={{ borderRight: "1px solid black" }}>
-                        <Square uniqueID="cube-2" position={2} value={state.positions[2]} takeTurn={takeTurn} />
-                    </div>
+    render() {
+        winner = detectWinner(this.state.positions)!
+        return (
+            <div className="Game">
+                <section className="grids">
+                    <section className="grid-1">
+                        <div id="cube-outline" style={{ borderRight: "1px solid black", borderBottom: "1px solid black" }}>
+                            <Square uniqueID="cube-0" position={0} value={this.state.positions[0]} takeTurn={this.takeTurn} />
+                        </div>
+                        <div id="cube-outline" style={{ borderRight: "1px solid black", borderBottom: "1px solid black" }}>
+                            <Square uniqueID="cube-1" position={1} value={this.state.positions[1]} takeTurn={this.takeTurn} />
+                        </div>
+                        <div id="cube-outline" style={{ borderRight: "1px solid black" }}>
+                            <Square uniqueID="cube-2" position={2} value={this.state.positions[2]} takeTurn={this.takeTurn} />
+                        </div>
+                    </section>
+                    <section className="grid-2">
+                        <div id="cube-outline" style={{ borderRight: "1px solid black", borderBottom: "1px solid black" }}>
+                            <Square uniqueID="cube-3" position={3} value={this.state.positions[3]} takeTurn={this.takeTurn} />
+                        </div>
+                        <div id="cube-outline" style={{ borderRight: "1px solid black", borderBottom: "1px solid black" }}>
+                            <Square uniqueID="cube-4" position={4} value={this.state.positions[4]} takeTurn={this.takeTurn} />
+                        </div>
+                        <div id="cube-outline" style={{ borderRight: "1px solid black" }}>
+                            <Square uniqueID="cube-5" position={5} value={this.state.positions[5]} takeTurn={this.takeTurn} />
+                        </div>
+                    </section>
+                    <section className="grid-3">
+                        <div id="cube-outline" style={{ borderBottom: "1px solid black" }}>
+                            <Square uniqueID="cube-6" position={6} value={this.state.positions[6]} takeTurn={this.takeTurn} />
+                        </div>
+                        <div id="cube-outline" style={{ borderBottom: "1px solid black" }}>
+                            <Square uniqueID="cube-7" position={7} value={this.state.positions[7]} takeTurn={this.takeTurn} />
+                        </div>
+                        <div id="cube-outline">
+                            <Square uniqueID="cube-8" position={8} value={this.state.positions[8]} takeTurn={this.takeTurn} />
+                        </div>
+                    </section>
                 </section>
-                <section className="grid-2">
-                    <div id="cube-outline" style={{ borderRight: "1px solid black", borderBottom: "1px solid black" }}>
-                        <Square uniqueID="cube-3" position={3} value={state.positions[3]} takeTurn={takeTurn} />
-                    </div>
-                    <div id="cube-outline" style={{ borderRight: "1px solid black", borderBottom: "1px solid black" }}>
-                        <Square uniqueID="cube-4" position={4} value={state.positions[4]} takeTurn={takeTurn} />
-                    </div>
-                    <div id="cube-outline" style={{ borderRight: "1px solid black" }}>
-                        <Square uniqueID="cube-5" position={5} value={state.positions[5]} takeTurn={takeTurn} />
-                    </div>
-                </section>
-                <section className="grid-3">
-                    <div id="cube-outline" style={{ borderBottom: "1px solid black" }}>
-                        <Square uniqueID="cube-6" position={6} value={state.positions[6]} takeTurn={takeTurn} />
-                    </div>
-                    <div id="cube-outline" style={{ borderBottom: "1px solid black" }}>
-                        <Square uniqueID="cube-7" position={7} value={state.positions[7]} takeTurn={takeTurn} />
-                    </div>
-                    <div id="cube-outline">
-                        <Square uniqueID="cube-8" position={8} value={state.positions[8]} takeTurn={takeTurn} />
-                    </div>
-                </section>
-            </section>
-            {winner && <Result winner={winner} reset={reset} />}
-        </div>
-    )
+                {winner && <Result winner={winner} reset={this.reset} />}
+            </div>
+        )
+    }
 }
 
 function Result({ winner, reset }: any) {
     document.getElementsByTagName("body")[0].style.backgroundColor = "#ccc"
     for (let i = 0; i < 9; i++) {
         //@ts-ignore
-        document.getElementById("cube-" + i).style.cursor = "unset"    
+        document.getElementById("cube-" + i).style.cursor = "unset"
     }
 
     game_finished = true
