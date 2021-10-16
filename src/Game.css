@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,300&display=swap');
+
+.grids {
+    width: 256px;
+    height: 256px;
+}
+
+.grid-1 {
+    width: 256px;
+    height: 256px;
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+.grid-2 {
+    width: 256px;
+    height: 256px;
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    margin-left: 86px;
+}
+
+.grid-3 {
+    width: 256px;
+    height: 256px;
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    margin-left: 172px;
+}
+
+#cube-outline {
+
+    position: relative;
+
+    height: 85px;
+    width: 85px;
+}
+
+#cube-0, #cube-1, #cube-2, #cube-3, #cube-4, #cube-5, #cube-6, #cube-7, #cube-8 {
+    position: absolute;
+    
+    height: 75px;
+    width: 75px;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#cube-0:hover, #cube-1:hover, #cube-2:hover, #cube-3:hover, #cube-4:hover, #cube-5:hover, #cube-6:hover, #cube-7:hover, #cube-8:hover {
+    background-color: #ccc;
+}
+
+.text {
+    text-align: center;
+    margin-top: 30px;
+
+    user-select: none;
+}
+
+.circle {
+
+    user-select: none;   
+}
+
+svg {
+    stroke-width: 5px;
+    stroke: black;
+    fill: none;
+    stroke-linecap: round;
+}
+
+.cross {
+
+    user-select: none;    
+}
+
+.result {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 500px;
+    margin-top: -25px;
+
+    transform: translate(-50%, -50%);
+
+    font-size: 3em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+
+    user-select: none;
+    color: white;
+}
+
+#reset-button {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    margin-top: 55px;
+
+    user-select: none;
+
+    background: white;
+    outline: none;
+    border: none;
+
+    font-size: 0.5em;
+    font-weight: bold;
+
+    width: 150px;
+    height: 50px;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 5px;
+
+    cursor: pointer;
+    color: black
+}
+

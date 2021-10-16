@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,300&display=swap');
+
+.buttons * {
+    height: 26px;
+    width: 26px;
+}
+
+/*
+    Buttons
+*/
+
+#close-btn, #maximize-btn, #minimize-btn {
+    /*
+        Positioning stuff
+    */
+    position: relative;
+    top: -34px;
+    left: 8px;
+    float: right;
+    /*
+        Thing to allow the buttons to be functional
+    */
+    -webkit-app-region: no-drag;
+
+    /*
+        Styling the button
+    */
+
+    background: none;
+    border: none;
+
+    color: #4f5660;
+}
+
+#close-btn {
+    background-image: url(img/close.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#maximize-btn {
+    background-image: url(img/maximize.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#minimize-btn {
+    background-image: url(img/minimize.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#maximize-btn:hover, #minimize-btn:hover {
+    background-color: #dadde1;
+}
+
+#minimize-btn:hover {
+    background-image: url(img/minimize-hover.png);
+    background-repeat: no-repeat;
+    background-position: center;
+
+    cursor: pointer;
+}
+
+#maximize-btn:hover {
+    background-image: url(img/maximize-hover.png);
+    background-repeat: no-repeat;
+    background-position: center;
+
+    cursor: pointer;
+}
+
+#close-btn:hover {
+    background-image: url(img/close-hover.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #ed4245;
+
+    cursor: pointer;
+}
+
+/*
+    Headers
+*/
+
+#header {
+
+    -webkit-app-region: drag;
+
+    height: 26px;
+    width: 130%;
+
+    /*
+        Positioning stuff
+    */
+
+    position: relative;
+    top: -8px;
+    left: -8px;
+
+    background-color: #e8e4ec;
+}
+
+#app-name {
+
+    font-family: 'Roboto', sans-serif;
+    
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+
+    user-select: none;
+}
