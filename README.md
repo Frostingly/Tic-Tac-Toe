@@ -1,3 +1,3 @@
 # Tic Tac Toe
 
-Basic Tic Tac Toe game.
+React, Typescript, HTML and CSS Tic Tac Toe game :)
